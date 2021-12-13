@@ -81,13 +81,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="note:${Notes}">
+                                <!--th:each="note:${Notes}"-->
+                                    <tr>
                                         <td>
                                             <button type="button" class="btn btn-success">Edit</button>
                                             <a class="btn btn-danger">Delete</a>
                                         </td>
-                                        <th scope="row" th:text = "${note.notetitle}}">Example Note Title</th>
-                                        <td  th:text = "${note.notedescription}}" >Example Note Description </td>
+                                        <!--th:text = "${note.notetitle}}" , th:text = "${note.notedescription}}" -->
+
+                                        <th scope="row" >Example Note Title</th>
+                                        <td  >Example Note Description </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -103,15 +106,15 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form th:object = "${note}"  method="POST"  th:action="@{/note}">
-                                            <input th:field = "*{noteid}" type="hidden" name="noteId"   id="note-id"  >
+                                        <form  method="POST" th:object="${note}"  th:action="@{/note}">
+                                            <input   type="hidden" name="noteId"   id="note-id"  >
                                             <div class="form-group">
-                                                <label for="note-title" class="col-form-label">Title</label>
-                                                <input th:field = "*{notetitle}" type="text" name= "noteTitle" class="form-control" id="note-title" maxlength="20" required>
+                                                <label for="note-title" th:field ="*{notetitle}" class="col-form-label">Title</label>
+                                                <input  type="text" name= "noteTitle" class="form-control" id="note-title" maxlength="20" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="note-description" class="col-form-label">Description</label>
-                                                <textarea  th:field = "*{notedescription}"  class="form-control" name="noteDescription" id="note-description" rows="5" maxlength="1000" required></textarea>
+                                                <textarea  class="form-control" th:field ="*{notedescription}" name="noteDescription" id="note-description" rows="5" maxlength="1000" required></textarea>
                                             </div>
                                             <button id="noteSubmit" type="submit" class="d-none"></button>
                                         </form>

@@ -22,6 +22,7 @@ public class HomeController
 
     public HomeController(UserService userService, FileService fileService, NoteService noteService, CredentialsService credentialService)
     {
+        System.out.print("In home controller");
         this.userService = userService;
         this.fileService = fileService;
         this.noteService = noteService;

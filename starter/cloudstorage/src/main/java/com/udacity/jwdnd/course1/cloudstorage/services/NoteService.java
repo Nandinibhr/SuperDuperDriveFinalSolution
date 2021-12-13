@@ -14,7 +14,8 @@ public class NoteService
 {
     private NoteMapper noteMapper;
 
-    public NoteService(NoteMapper noteMapper)
+
+    public NoteService(NoteMapper noteMapper, UserService userService)
     {
         this.noteMapper = noteMapper;
     }
@@ -24,9 +25,12 @@ public class NoteService
         return noteMapper.getAllNotes(userid);
     }
 
-    public void addNote(Note note)
-    {
+    public void createOrEditNote(Note note) {
+        if (note.getNoteid() == null) {
             noteMapper.insert(note);
+        } else {
+            noteMapper.update(note);
+        }
     }
 
     public void updateNote(Note note)
