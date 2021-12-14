@@ -106,7 +106,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form  method="POST" th:object="${note}"  th:action="@{/note}">
+                                        <form  method="POST" th:object="${note}"  th:action="@{/note/add}">
                                             <input   type="hidden" name="noteId"   id="note-id"  >
                                             <div class="form-group">
                                                 <label for="note-title" th:field ="*{notetitle}" class="col-form-label">Title</label>
