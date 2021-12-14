@@ -4,12 +4,9 @@ import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/note")
@@ -25,7 +22,7 @@ public class NoteController
     }
 
     @GetMapping("")
-    public String getNotes(Authentication authentication , Note note ,Model model)
+    public String getNotes(Authentication authentication , Note note , @ModelAttribute Model model)
     {
         Integer userid = UserService.getCurrentUserId(authentication);
         model.addAttribute("Notes", noteService.getNotes(userid));
@@ -33,8 +30,8 @@ public class NoteController
     }
 
 
-    @RequestMapping(value = "", method=RequestMethod.POST)
-    public String createOrEditNote(Authentication authentication , Model model , Note note )
+    @PostMapping("/add")
+    public String createOrEditNote(Authentication authentication , Model model , @ModelAttribute Note note )
     {
         System.out.print("IN note controller -- add method");
         Integer userid = UserService.getCurrentUserId(authentication);
@@ -45,7 +42,7 @@ public class NoteController
 
 
     @GetMapping("/delete")
-    public String deleteNote(Authentication authentication , Model model , Note note )
+    public String deleteNote(Authentication authentication , Model model , @ModelAttribute Note note )
     {
         Integer userid = UserService.getCurrentUserId(authentication);
         noteService.deleteNote(userid, note.getNoteid());
@@ -55,5 +52,3 @@ public class NoteController
 
 
 }
-
-
